@@ -1,0 +1,80 @@
+@import url("https://fonts.googleapis.com/css?family=Mitr&display=swap");
+/* -------------------------------------------- button ---------------------------------------------------- */
+
+.btnGroup {
+    text-align: center;
+    background-color: purple;
+    height: 50px;
+  }
+  
+  .btn {
+    height: 90%;
+    width: 75px;
+    margin: 1px;
+    text-align: center;
+    font-family: "Mitr", sans-serif;
+    font-size: 14px;
+    background-color: white;
+    border-radius: 5px;
+    border: 1px solid transparent;
+  }
+  
+  .btn-flip {
+    color: #28a745;
+    border-color: #28a745;
+  }
+  
+  .btn-flip:hover {
+    color: #fff;
+    background-color: #28a745;
+    border-color: #28a745
+  }
+  
+  .btn-flip.focus, .btn-flip:focus {
+    box-shadow: 0 0 0 .2rem rgba(40, 167, 69, .5)
+  }
+  
+  .btn-flip.disabled, .btn-flip:disabled {
+    color: #28a745;
+    background-color: rgb(173, 173, 173);
+  }
+  
+  .btn-flip:not(:disabled):not(.disabled).active, .btn-flip:not(:disabled):not(.disabled):active, .show>.btn-flip.dropdown-toggle {
+    color: #fff;
+    background-color: #28a745;
+    border-color: #28a745
+  }
+  
+  .btn-flip:not(:disabled):not(.disabled).active:focus, .btn-flip:not(:disabled):not(.disabled):active:focus, .show>.btn-flip.dropdown-toggle:focus {
+    box-shadow: 0 0 0 .2rem rgba(40, 167, 69, .5)
+  }
+  
+  .btn-change {
+    color: #1673c0;
+    border-color: #1673c0;
+  }
+  
+  .btn-change:hover {
+    color: #fff;
+    background-color: #1673c0;
+    border-color: #1673c0
+  }
+  
+  .btn-change.focus, .btn-change:focus {
+    box-shadow: 0 0 0 .2rem 1673c0
+  }
+  
+  .btn-change.disabled, .btn-change:disabled {
+    color: #1673c0;
+    background-color: 1673c0;
+  }
+  
+  .btn-change:not(:disabled):not(.disabled).active, .btn-change:not(:disabled):not(.disabled):active, .show>.btn-change.dropdown-toggle {
+    color: #fff;
+    background-color: #1673c0;
+    border-color: #1673c0
+  }
+  
+  .btn-change:not(:disabled):not(.disabled).active:focus, .btn-change:not(:disabled):not(.disabled):active:focus, .show>.btn-change.dropdown-toggle:focus {
+    box-shadow: 0 0 0 .2rem 1673c0
+  }
