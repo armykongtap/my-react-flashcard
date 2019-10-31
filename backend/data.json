@@ -1,0 +1,29 @@
+{
+  "count": 2,
+  "next": null,
+  "previous": null,
+  "results": [
+    {
+      "url": "http://127.0.0.1:8000/users/2/?format=json",
+      "username": "user01",
+      "password": "1234",
+      "email": "user01@mail.com",
+      "groups": []
+    },
+    {
+      "url": "http://127.0.0.1:8000/users/1/?format=json",
+      "username": "admin",
+      "password": "pbkdf2_sha256$150000$YY0u0Yr7Aeja$5XdRl6zO5R5SY2z/e7UQm7AT9p9BqfZfPWswWJaGB8Q=",
+      "email": "admin@example.com",
+      "groups": []
+    }
+  ]
+}
+
+<ul>
+{results.map(res => (
+  <li key={res.username}>
+    <a>{res.username}</a>
+  </li>
+))}
+</ul>

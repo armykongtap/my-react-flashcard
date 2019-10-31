@@ -2,8 +2,6 @@ import React from "react";
 import "./Flashcard.css";
 import "./button.css";
 
-// var data = require("./data.json");
-
 class Deck extends React.Component {
   render() {
     return (
@@ -27,7 +25,7 @@ class Category extends React.Component {
   }
 
   renderDeck(i) {
-    return <Deck deckID={i} onClick={() => this.sendData(i)} />;
+    return <Deck key={i} deckID={i} onClick={() => this.sendData(i)} />;
   }
 
   sendData = i => {

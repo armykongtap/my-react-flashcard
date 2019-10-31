@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import Category from "./Category";
 import CardDeck from "./CardDeck";
+import Api from "./Api";
 import * as serviceWorker from "./serviceWorker";
 
 class MainPage extends React.Component {
@@ -25,6 +26,7 @@ class MainPage extends React.Component {
           parentCallback={this.callbackFunction}
         />
         <CardDeck deckID={this.state.deckID} />
+        <Api />
       </div>
     );
   }
