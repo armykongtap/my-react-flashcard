@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-const API = "http://localhost:8000/users/?format=json";
+const WEB = "http://localhost:8000/users/?format=json";
 
 class Api extends Component {
   constructor(props) {
@@ -12,7 +12,7 @@ class Api extends Component {
   }
   componentDidMount() {
     this.setState({ isLoading: true });
-    fetch(API)
+    fetch(WEB)
       .then(response => response.json())
       .then(data => this.setState({ results: data.results, isLoading: false }));
   }
