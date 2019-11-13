@@ -19,7 +19,7 @@ class Login extends React.Component {
   }
 
   handleSubmit(event) {
-    alert(this.state.username + "   " + this.state.password);
+    alert(this.state.username + " " + this.state.password);
     event.preventDefault();
   }
 
