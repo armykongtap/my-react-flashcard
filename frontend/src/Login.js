@@ -20,18 +20,14 @@ class Login extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-
     fetch("http://127.0.0.1:8000/snippets/", {
       method: "POST",
-      headers: new Headers(),
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        title: this.state.username,
-        body: this.state.password
+        username: this.state.username,
+        password: this.state.password
       })
-    })
-      .then(res => res.json())
-      .then(data => console.log(data))
-      .catch(err => console.log(err));
+    });
   }
 
   render() {
@@ -53,7 +49,7 @@ class Login extends React.Component {
           />
         </label>
         <br />
-        <input type="submit" value="Submit" />
+        <input type="submit" value="Register" />
       </form>
     );
   }
