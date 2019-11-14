@@ -19,8 +19,19 @@ class Login extends React.Component {
   }
 
   handleSubmit(event) {
-    alert(this.state.username + " " + this.state.password);
     event.preventDefault();
+
+    fetch("http://127.0.0.1:8000/users/", {
+      method: "POST",
+      headers: new Headers(),
+      body: JSON.stringify({
+        title: this.state.username,
+        body: this.state.password
+      })
+    })
+      .then(res => res.json())
+      .then(data => console.log(data))
+      .catch(err => console.log(err));
   }
 
   render() {
