@@ -18,14 +18,16 @@ class Login extends React.Component {
     this.setState({ password: event.target.value });
   }
 
-  async handleSubmit(event) {
-    let response;
+  sendData = i => {
+    this.props.parentCallback(i);
+  };
+
+  handleSubmit(event) {
     event.preventDefault();
-    response = await fetch("http://127.0.0.1:8000/login/", {
-      method: "GET",
-      headers: { "Content-Type": "application/json" }
-    });
-    console.log(response);
+    // fetch("http://127.0.0.1:8000/login/")
+    //   .then(response => response.json())
+    //   .then(data => this.setState({}));
+    this.sendData('555');
     this.setState({ username: "", password: "" });
   }
 
