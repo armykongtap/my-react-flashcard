@@ -18,16 +18,15 @@ class Login extends React.Component {
     this.setState({ password: event.target.value });
   }
 
-  handleSubmit(event) {
+  async handleSubmit(event) {
+    let response;
     event.preventDefault();
-    fetch("http://127.0.0.1:8000/login/", {
+    response = await fetch("http://127.0.0.1:8000/login/", {
       method: "GET",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        username: this.state.username,
-        password: this.state.password
-      })
+      headers: { "Content-Type": "application/json" }
     });
+    console.log(response);
+    this.setState({ username: "", password: "" });
   }
 
   render() {
@@ -49,7 +48,7 @@ class Login extends React.Component {
           />
         </label>
         <br />
-        <input type="submit" value="Register" />
+        <input type="submit" value="Login" />
       </form>
     );
   }

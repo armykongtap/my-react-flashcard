@@ -18,9 +18,10 @@ class Register extends React.Component {
     this.setState({ password: event.target.value });
   }
 
-  handleSubmit(event) {
+  async handleSubmit(event) {
+    let response;
     event.preventDefault();
-    fetch("http://127.0.0.1:8000/", {
+    response = await fetch("http://127.0.0.1:8000/", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -28,29 +29,33 @@ class Register extends React.Component {
         password: this.state.password
       })
     });
+    console.log(response);
+    this.setState({ username: "", password: "" });
   }
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
-        <label>
-          Username :
-          <input
-            type="text"
-            value={this.state.username}
-            onChange={this.handleChangeUsername}
-          />
+      <div>
+        <form onSubmit={this.handleSubmit}>
+          <label>
+            Username :
+            <input
+              type="text"
+              value={this.state.username}
+              onChange={this.handleChangeUsername}
+            />
+            <br />
+            Password :
+            <input
+              type="password"
+              value={this.state.password}
+              onChange={this.handleChangePassword}
+            />
+          </label>
           <br />
-          Password :
-          <input
-            type="password"
-            value={this.state.password}
-            onChange={this.handleChangePassword}
-          />
-        </label>
-        <br />
-        <input type="submit" value="Register" />
-      </form>
+          <input type="submit" value="Register" />
+        </form>
+      </div>
     );
   }
 }
