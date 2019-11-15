@@ -46,3 +46,17 @@ def snippet_detail(request, pk):
     elif request.method == 'DELETE':
         snippet.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+@api_view(['GET'])
+def test(request):
+    snippet = Snippet.objects.get(pk=1)
+    serializer = SnippetSerializer(snippet)
+    return Response(serializer.data['username'])
+
+
+@api_view(['GET'])
+def login(request):
+    if request.method == 'GET':
+        serializer = SnippetSerializer(data=request.data)
+        
+        return Response(1)        

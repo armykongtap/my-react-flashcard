@@ -9,7 +9,7 @@ STYLE_CHOICES = sorted([(item, item) for item in get_all_styles()])
 
 class Snippet(models.Model):
     created = models.DateTimeField(auto_now_add=True)
-    username = models.CharField(max_length=100, default='')
-    password = models.CharField(max_length=100, default='')
+    username = models.CharField(max_length=32, default='')
+    password = models.CharField(max_length=32, default='')
     class Meta:
         ordering = ['created']

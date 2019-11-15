@@ -20,8 +20,8 @@ class Login extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    fetch("http://127.0.0.1:8000/snippets/", {
-      method: "POST",
+    fetch("http://127.0.0.1:8000/login/", {
+      method: "GET",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         username: this.state.username,
