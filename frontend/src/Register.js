@@ -3,7 +3,7 @@ import React from "react";
 class Register extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { username: "", password: "" };
+    this.state = { username: "", password: "", message: "" };
 
     this.handleChangeUsername = this.handleChangeUsername.bind(this);
     this.handleChangePassword = this.handleChangePassword.bind(this);
@@ -28,16 +28,17 @@ class Register extends React.Component {
           Accept: "application/json",
           "Content-Type": "application/json"
         },
-        // body: JSON.stringify({
-        //   username: this.state.username,
-        //   password: this.state.password
-        // })
         body: JSON.stringify({
-          username: "aaaa",
-          password: "aaaa"
+          username: this.state.username,
+          password: this.state.password
         })
       });
-      console.log(response);
+      console.log(response.status);
+      if (response.status === 201) {
+        this.setState({ message: "Register Sucess" });
+      } else {
+        this.setState({ message: "Try again" });
+      }
     } catch (err) {
       console.error(err);
     }
@@ -66,6 +67,7 @@ class Register extends React.Component {
           <br />
           <input type="submit" value="Register" />
         </form>
+        <div>{this.state.message}</div>
       </div>
     );
   }
