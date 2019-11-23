@@ -25,18 +25,21 @@ class Register extends React.Component {
       response = await fetch("http://127.0.0.1:8000/auth/register", {
         method: "POST",
         headers: {
-          "Content-Type": "application/json",
-          "Access-Control-Allow-Origin": "*"
+          Accept: "application/json",
+          "Content-Type": "application/json"
         },
         // body: JSON.stringify({
         //   username: this.state.username,
         //   password: this.state.password
         // })
-        body: JSON.stringify(this.state)
+        body: JSON.stringify({
+          username: "aaaa",
+          password: "aaaa"
+        })
       });
       console.log(response);
     } catch (err) {
-      console.log(err);
+      console.error(err);
     }
     this.setState({ username: "", password: "" });
   }
