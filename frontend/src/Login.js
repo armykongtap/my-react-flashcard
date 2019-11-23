@@ -22,12 +22,30 @@ class Login extends React.Component {
     this.props.parentCallback(i);
   };
 
-  handleSubmit(event) {
+  async handleSubmit(event) {
+    let response;
     event.preventDefault();
-    // fetch("http://127.0.0.1:8000/login/")
-    //   .then(response => response.json())
-    //   .then(data => this.setState({}));
-    this.sendData('555');
+    try {
+      response = await fetch("http://localhost:8000/auth/login/", {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          username: this.state.username,
+          password: this.state.password
+        })
+      });
+      response.json().then(x => this.sendData(x));
+      if (response.status === 201) {
+        this.setState({ message: "Login Sucess" });
+      } else {
+        this.setState({ message: "Try again" });
+      }
+    } catch (err) {
+      console.error(err);
+    }
     this.setState({ username: "", password: "" });
   }
 
