@@ -22,7 +22,7 @@ class Register extends React.Component {
     let response;
     event.preventDefault();
     try {
-      response = await fetch("http://127.0.0.1:8000/auth/register", {
+      response = await fetch("http://localhost:8000/auth/register/", {
         method: "POST",
         headers: {
           Accept: "application/json",
