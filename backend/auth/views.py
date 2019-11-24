@@ -2,7 +2,7 @@ from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from django.contrib.auth.models import User
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 
 
 @api_view(['POST'])
@@ -28,7 +28,7 @@ def login(request):
         request.user = user
         if user is not None:
             login(request._request)
-            return Response(user.username, status=status.HTTP_200_OK)
+            return Response(user.username, status=status.HTTP_201_CREATED)
         else:
             return Response(0, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 

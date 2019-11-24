@@ -3,6 +3,7 @@ import React from "react";
 class Logout extends React.Component {
   constructor(props) {
     super(props);
+    this.state = { message: "" };
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
@@ -12,18 +13,18 @@ class Logout extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    // fetch("http://127.0.0.1:8000/login/")
-    //   .then(response => response.json())
-    //   .then(data => this.setState({}));
-    this.sendData("222");
-    this.setState({ username: "", password: "" });
+    this.sendData("GUEST");
+    this.setState({ message: "Logout Sucess" });
   }
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
-        <input type="submit" value="Logout" />
-      </form>
+      <div>
+        <form onSubmit={this.handleSubmit}>
+          <input type="submit" value="Logout" />
+        </form>
+        <div>{this.state.message}</div>
+      </div>
     );
   }
 }

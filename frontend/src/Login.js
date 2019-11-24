@@ -3,7 +3,7 @@ import React from "react";
 class Login extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { username: "", password: "" };
+    this.state = { username: "", password: "", message: "" };
 
     this.handleChangeUsername = this.handleChangeUsername.bind(this);
     this.handleChangePassword = this.handleChangePassword.bind(this);
@@ -38,6 +38,7 @@ class Login extends React.Component {
         })
       });
       response.json().then(x => this.sendData(x));
+      // console.log(response)
       if (response.status === 201) {
         this.setState({ message: "Login Sucess" });
       } else {
@@ -69,6 +70,7 @@ class Login extends React.Component {
         </label>
         <br />
         <input type="submit" value="Login" />
+        <div>{this.state.message}</div>
       </form>
     );
   }
