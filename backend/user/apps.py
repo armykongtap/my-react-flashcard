@@ -1,5 +1,5 @@
 from django.apps import AppConfig
 
 
-class WordlistConfig(AppConfig):
-    name = 'wordList'
+class UserConfig(AppConfig):
+    name = 'user'

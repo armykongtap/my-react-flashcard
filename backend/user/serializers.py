@@ -1,14 +1,20 @@
-from django.contrib.auth.models import User, Group
 from rest_framework import serializers
+from user.models import WordCard, Catagory, User
+
+
+class WordCardSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = WordCard
+        fields = ['id', 'th', 'en', 'ch']
+
+
+class CatagorySerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Catagory
+        fields = ['id', 'catName', 'wordList']
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = User
-        fields = ['url', 'username', 'email', 'groups']
-
-
-class GroupSerializer(serializers.HyperlinkedModelSerializer):
-    class Meta:
-        model = Group
-        fields = ['url', 'name']
+        fields = ['id', 'userName', 'catList']
