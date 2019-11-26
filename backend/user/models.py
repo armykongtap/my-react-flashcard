@@ -9,9 +9,11 @@ class WordCard(models.Model):
 
 class Catagory(models.Model):
     catName = models.CharField(blank=False, default='unnamed', max_length=100)
-    wordList = models.ForeignKey('WordCard', on_delete=models.CASCADE,)
+    wordList = models.ForeignKey(
+        'WordCard', on_delete=models.SET_NULL, null=True)
 
 
 class User(models.Model):
     userName = models.CharField(blank=False, default='unnamed', max_length=100)
-    catList = models.ForeignKey('Catagory', on_delete=models.CASCADE,)
+    catList = models.ForeignKey(
+        'Catagory', on_delete=models.SET_NULL, null=True)
