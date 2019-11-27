@@ -7,7 +7,8 @@ class Home extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      deckID: "Animal"
+      deckID: "Animal",
+      currentUserID: this.props.currentUserID
     };
   }
 
@@ -22,7 +23,10 @@ class Home extends React.Component {
           deckID={this.state.deckID}
           parentCallback={this.callbackFunction}
         />
-        <CardDeck deckID={this.state.deckID} />
+        <CardDeck
+          deckID={this.state.deckID}
+          currentUserID={this.state.currentUserID}
+        />
       </div>
     );
   }

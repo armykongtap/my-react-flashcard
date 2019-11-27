@@ -42,7 +42,7 @@ class App extends React.Component {
               <Logout parentCallback={this.callbackFunction} />
             </Route>
             <Route path="/">
-              <Home />
+              <Home currentUserID={this.state.currentUserID} />
             </Route>
           </Switch>
         </div>

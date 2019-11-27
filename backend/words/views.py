@@ -75,3 +75,16 @@ def word_detail(request, pk):
     if request.method == 'GET':
         serializer = WordCardSerializer(word)
         return JsonResponse(serializer.data, json_dumps_params={'ensure_ascii': False})
+    elif request.method == 'DELETE':
+        word.delete()
+        return HttpResponse(status=204)
+
+
+@csrf_exempt
+def word_filter(request, user, catName):
+
+    if request.method == 'GET':
+        words = WordCard.objects.filter(user=user, category=catName)
+        serializer = WordCardSerializer(words, many=True)
+        return JsonResponse(serializer.data, safe=False, json_dumps_params={'ensure_ascii': False})
+
