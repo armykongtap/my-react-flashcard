@@ -11,10 +11,10 @@ class WordCardSerializer(serializers.HyperlinkedModelSerializer):
 class CatagorySerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Catagory
-        fields = ['id', 'catName', 'wordList']
+        fields = ['id', 'catName']
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = User
-        fields = ['id', 'userName', 'catList']
+        fields = ['id', 'userName']
