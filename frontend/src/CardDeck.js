@@ -1,7 +1,6 @@
 import React from "react";
 import "./Flashcard.css";
 import "./button.css";
-var data = require("./data.json");
 
 class Card extends React.Component {
   sendData = x => {
@@ -9,6 +8,7 @@ class Card extends React.Component {
   };
 
   render() {
+    const lang = ["en", "th", "ch"];
     return this.props.wordList === null ? (
       <div></div>
     ) : this.props.status !== "Card" ? (
@@ -17,11 +17,11 @@ class Card extends React.Component {
         onClick={this.props.onClick}
         onTransitionEnd={() => this.sendData(this.props.status)}
       >
-        {this.props.wordList[this.props.currentPage]}
+        {this.props.wordList[lang[this.props.currentPage]]}
       </div>
     ) : (
       <div className={this.props.status} onClick={this.props.onClick}>
-        {this.props.wordList[this.props.currentPage]}
+        {this.props.wordList[lang[this.props.currentPage]]}
       </div>
     );
   }
@@ -61,7 +61,7 @@ class CardDeck extends React.Component {
   getWordList(wordID) {
     if (this.state.data === null) return null;
     if (this.props.deckID === null) return null;
-    return data[this.props.deckID][wordID];
+    return this.state.data[wordID];
   }
 
   renderCard(wordID) {
@@ -81,7 +81,7 @@ class CardDeck extends React.Component {
   }
 
   nextCardState() {
-    if (this.state.currentCard + 1 < data[this.props.deckID].length) {
+    if (this.state.currentCard + 1 < this.state.data.length) {
       this.setState({
         currentCard: this.state.currentCard + 1,
         currentPage: 0
@@ -103,7 +103,7 @@ class CardDeck extends React.Component {
       });
     } else {
       this.setState({
-        currentCard: data[this.props.deckID].length - 1,
+        currentCard: this.state.data.length - 1,
         currentPage: 0
       });
     }
@@ -114,10 +114,7 @@ class CardDeck extends React.Component {
   }
 
   changePageState() {
-    if (
-      this.state.currentPage + 1 <
-      data[this.props.deckID][this.state.currentCard].length
-    ) {
+    if (this.state.currentPage + 1 < 3) {
       this.setState({ currentPage: this.state.currentPage + 1 });
     } else {
       this.setState({ currentPage: 0 });

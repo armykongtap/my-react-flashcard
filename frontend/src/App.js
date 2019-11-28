@@ -19,15 +19,17 @@ class App extends React.Component {
   };
 
   render() {
+    let isGUEST = this.state.currentUserID === "GUEST";
     return (
       <Router>
         <div>
           <div>{this.state.currentUserID}</div>
           <div>
             <Link to="/">Home</Link>
-            <Link to="/login">Login</Link>
-            <Link to="/logout">Logout</Link>
-            <Link to="/register">Register</Link>
+            {isGUEST ? <Link to="/login">Login</Link> : null}
+            {isGUEST ? <Link to="/register">Register</Link> : null}
+
+            {isGUEST ? null : <Link to="/logout">Logout</Link>}
           </div>
           {/* A <Switch> looks through its children <Route>s and
               renders the first one that matches the current URL. */}

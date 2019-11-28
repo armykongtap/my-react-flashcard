@@ -44,4 +44,43 @@ def word_filter(request, user, catName):
     if request.method == 'GET':
         words = WordCard.objects.filter(user=user, category=catName)
         serializer = WordCardSerializer(words, many=True)
+        print(type(serializer.data))
         return JsonResponse(serializer.data, safe=False, json_dumps_params={'ensure_ascii': False})
+
+
+@csrf_exempt
+def initialise(request, user):
+    if request.method == 'GET':
+        dog = WordCard(en='Dog', th='หมา', ch='狗',
+                       category='Animal', user=user)
+        dog.save()
+        cat = WordCard(en='Cat', th='แมว', ch='貓',
+                       category='Animal', user=user)
+        cat.save()
+        ant = WordCard(en='Ant', th='มด', ch='螞蟻',
+                       category='Animal', user=user)
+        ant.save()
+
+        apple = WordCard(en='Apple', th='แอปเปิ้ล', ch='蘋果',
+                         category='Fruit', user=user)
+        apple.save()
+        papaya = WordCard(en='Papaya', th='มะละกอ', ch='番木瓜',
+                          category='Fruit', user=user)
+        papaya.save()
+        banana = WordCard(en='Banana', th='กล้วย', ch='香蕉',
+                          category='Fruit', user=user)
+        banana.save()
+        orange = WordCard(en='Orange', th='ส้ม', ch='橙子',
+                          category='Fruit', user=user)
+        orange.save()
+
+        red = WordCard(en='Red', th='แดง', ch='紅色',
+                       category='Color', user=user)
+        red.save()
+        yellow = WordCard(en='Yellow', th='เหลือง', ch='黃色',
+                          category='Color', user=user)
+        yellow.save()
+        green = WordCard(en='Green', th='เขียว', ch='綠色',
+                         category='Color', user=user)
+        green.save()
+        return HttpResponse(status=200)

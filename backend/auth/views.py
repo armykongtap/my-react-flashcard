@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 
 
+
 @api_view(['POST'])
 def register(request):
 
@@ -30,7 +31,7 @@ def login(request):
             login(request._request)
             return Response(user.username, status=status.HTTP_201_CREATED)
         else:
-            return Response(0, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            return Response("GUEST", status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
 @api_view(['POST'])

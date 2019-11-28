@@ -42,6 +42,15 @@ class Register extends React.Component {
     } catch (err) {
       console.error(err);
     }
+
+    try {
+      let url =
+        "http://localhost:8000/words/initialise/" + this.state.username + "/1/";
+      fetch(url)
+    } catch (err) {
+      console.error(err);
+    }
+
     this.setState({ username: "", password: "" });
   }
 

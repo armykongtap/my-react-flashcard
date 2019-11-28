@@ -18,6 +18,7 @@ class Home extends React.Component {
   };
 
   render() {
+    const showWordAdd = this.state.currentUserID !== "GUEST";
     return (
       <div className={"Home"}>
         <Category
@@ -28,7 +29,11 @@ class Home extends React.Component {
           deckID={this.state.deckID}
           currentUserID={this.state.currentUserID}
         />
-        <WordAdd currentUserID={this.state.currentUserID} />
+        {showWordAdd ? (
+          <WordAdd currentUserID={this.state.currentUserID} />
+        ) : (
+          <div>Login to Add Word</div>
+        )}
       </div>
     );
   }
