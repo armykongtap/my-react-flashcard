@@ -44,7 +44,7 @@ class CardDeck extends React.Component {
 
   loaddata() {
     let url =
-      "https://localhost:8000/" +
+      "http://localhost:8000/words/" +
       this.props.currentUserID +
       "/" +
       this.props.deckID +
