@@ -2,6 +2,7 @@ import React from "react";
 import "./Home.css";
 import Category from "./Category";
 import CardDeck from "./CardDeck";
+import WordAdd from "./WordAdd";
 
 class Home extends React.Component {
   constructor(props) {
@@ -27,6 +28,7 @@ class Home extends React.Component {
           deckID={this.state.deckID}
           currentUserID={this.state.currentUserID}
         />
+        <WordAdd currentUserID={this.state.currentUserID} />
       </div>
     );
   }
