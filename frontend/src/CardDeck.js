@@ -4,7 +4,6 @@ import "./button.css";
 var data = require("./data.json");
 
 class Card extends React.Component {
-
   sendData = x => {
     this.props.parentCallback(x);
   };
@@ -12,17 +11,19 @@ class Card extends React.Component {
   render() {
     return this.props.wordList === null ? (
       <div></div>
-    ) :
-      this.props.status !== "Card" ?
-        (
-          <div className={this.props.status} onClick={this.props.onClick} onTransitionEnd={() => this.sendData(this.props.status)}>
-            {this.props.wordList[this.props.currentPage]}
-          </div>
-        ) : (
-          <div className={this.props.status} onClick={this.props.onClick}>
-            {this.props.wordList[this.props.currentPage]}
-          </div>
-        );
+    ) : this.props.status !== "Card" ? (
+      <div
+        className={this.props.status}
+        onClick={this.props.onClick}
+        onTransitionEnd={() => this.sendData(this.props.status)}
+      >
+        {this.props.wordList[this.props.currentPage]}
+      </div>
+    ) : (
+      <div className={this.props.status} onClick={this.props.onClick}>
+        {this.props.wordList[this.props.currentPage]}
+      </div>
+    );
   }
 }
 
@@ -34,14 +35,33 @@ class CardDeck extends React.Component {
       currentCard: 0,
       currentPage: 0,
       deckID: this.props.deckID,
+      data: null
     };
     this.nextCard = this.nextCard.bind(this);
     this.prevCard = this.prevCard.bind(this);
     this.changePage = this.changePage.bind(this);
   }
 
+  loaddata() {
+    let url =
+      "https://localhost:8000/" +
+      this.props.currentUserID +
+      "/" +
+      this.props.deckID +
+      "/";
+    fetch(url)
+      .then(response => response.json())
+      .then(data => this.setState({ data: data }));
+  }
+
+  componentDidMount() {
+    this.loaddata();
+  }
+
   getWordList(wordID) {
-    return this.props.deckID === null ? null : data[this.props.deckID][wordID];
+    if (this.state.data === null) return null;
+    if (this.props.deckID === null) return null;
+    return data[this.props.deckID][wordID];
   }
 
   renderCard(wordID) {
@@ -57,36 +77,47 @@ class CardDeck extends React.Component {
   }
 
   nextCard() {
-    this.setState({ status: "Card Card-left-out", });
+    this.setState({ status: "Card Card-left-out" });
   }
 
   nextCardState() {
     if (this.state.currentCard + 1 < data[this.props.deckID].length) {
-      this.setState({ currentCard: this.state.currentCard + 1, currentPage: 0 });
+      this.setState({
+        currentCard: this.state.currentCard + 1,
+        currentPage: 0
+      });
     } else {
       this.setState({ currentCard: 0, currentPage: 0 });
     }
   }
 
   prevCard() {
-    this.setState({ status: "Card Card-right-out", });
+    this.setState({ status: "Card Card-right-out" });
   }
 
   prevCardState() {
-
     if (this.state.currentCard - 1 >= 0) {
-      this.setState({ currentCard: this.state.currentCard - 1, currentPage: 0 });
+      this.setState({
+        currentCard: this.state.currentCard - 1,
+        currentPage: 0
+      });
     } else {
-      this.setState({ currentCard: data[this.props.deckID].length - 1, currentPage: 0 });
+      this.setState({
+        currentCard: data[this.props.deckID].length - 1,
+        currentPage: 0
+      });
     }
   }
 
   changePage() {
-    this.setState({ status: "Card Card-flip", });
+    this.setState({ status: "Card Card-flip" });
   }
 
   changePageState() {
-    if (this.state.currentPage + 1 < data[this.props.deckID][this.state.currentCard].length) {
+    if (
+      this.state.currentPage + 1 <
+      data[this.props.deckID][this.state.currentCard].length
+    ) {
       this.setState({ currentPage: this.state.currentPage + 1 });
     } else {
       this.setState({ currentPage: 0 });
@@ -98,8 +129,9 @@ class CardDeck extends React.Component {
       this.setState({
         currentCard: 0,
         currentPage: 0,
-        deckID: this.props.deckID,
+        deckID: this.props.deckID
       });
+      this.loaddata();
     }
   }
 
@@ -107,35 +139,34 @@ class CardDeck extends React.Component {
     switch (childData) {
       case "Card Card-flip":
         this.changePageState();
-        this.setState({ status: "Card", });
+        this.setState({ status: "Card" });
         break;
 
       case "Card Card-left-out":
         this.nextCardState();
-        this.setState({ status: "Card Card-right-in", });
+        this.setState({ status: "Card Card-right-in" });
         break;
 
       case "Card Card-right-in":
-        this.setState({ status: "Card", });
+        this.setState({ status: "Card" });
         break;
 
       case "Card Card-right-out":
         this.prevCardState();
-        this.setState({ status: "Card Card-left-in", });
+        this.setState({ status: "Card Card-left-in" });
         break;
 
       case "Card Card-left-in":
-        this.setState({ status: "Card", });
+        this.setState({ status: "Card" });
         break;
 
       default:
-        this.setState({ status: "Card", });
+        this.setState({ status: "Card" });
         break;
     }
   };
 
   render() {
-
     return (
       <div>
         <div className="Card-Deck">
@@ -143,8 +174,12 @@ class CardDeck extends React.Component {
         </div>
 
         <div className={"btnGroup"}>
-          <button className={"btn btn-change"} onClick={this.prevCard}>Back</button>
-          <button className={"btn btn-change"} onClick={this.nextCard}>Next</button>
+          <button className={"btn btn-change"} onClick={this.prevCard}>
+            Back
+          </button>
+          <button className={"btn btn-change"} onClick={this.nextCard}>
+            Next
+          </button>
         </div>
       </div>
     );
